@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "T:\\Documents\\VSC\\api\\api.csproj": {}
+    "T:\\Documents\\VSC\\TeddySmithDev-dotNet8WebAPI\\api\\api.csproj": {}
   },
   "projects": {
-    "T:\\Documents\\VSC\\api\\api.csproj": {
+    "T:\\Documents\\VSC\\TeddySmithDev-dotNet8WebAPI\\api\\api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "T:\\Documents\\VSC\\api\\api.csproj",
+        "projectUniqueName": "T:\\Documents\\VSC\\TeddySmithDev-dotNet8WebAPI\\api\\api.csproj",
         "projectName": "api",
-        "projectPath": "T:\\Documents\\VSC\\api\\api.csproj",
+        "projectPath": "T:\\Documents\\VSC\\TeddySmithDev-dotNet8WebAPI\\api\\api.csproj",
         "packagesPath": "C:\\Users\\Vulus\\.nuget\\packages\\",
-        "outputPath": "T:\\Documents\\VSC\\api\\obj\\",
+        "outputPath": "T:\\Documents\\VSC\\TeddySmithDev-dotNet8WebAPI\\api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Vulus\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -48,11 +48,27 @@
           "dependencies": {
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
-              "version": "[8.0.8, )"
+              "version": "[8.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.10, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.4.0, )"
+              "version": "[6.8.1, )"
             }
           },
           "imports": [
