@@ -1,4 +1,5 @@
 using System;
+using System.Linq.Expressions;
 using api.Dtos.Stock;
 using api.Models;
 
@@ -13,6 +14,16 @@ namespace api.Mappers {
                 LastDiv = stockModel.LastDiv,
                 Industry = stockModel.Industry,
                 MarketCap = stockModel.MarketCap
+            };
+        }
+        public static Stock toStockFromCreateDTO(this CreateStockRequestDto createStockRequestDto) {
+            return new Stock {
+                Symbol = createStockRequestDto.Symbol,
+                CompanyName = createStockRequestDto.CompanyName,
+                Purcase = createStockRequestDto.Purcase,
+                LastDiv = createStockRequestDto.LastDiv,
+                Industry = createStockRequestDto.Industry,
+                MarketCap = createStockRequestDto.MarketCap
             };
         }
     }
