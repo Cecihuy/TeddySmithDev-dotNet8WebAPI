@@ -24,7 +24,7 @@ namespace api.Controllers{
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById([FromRoute] int id) {
-            var stock = await _applicationDBContext.Stocks.FindAsync(id);
+            var stock = await _stockRepository.GetByIdAsync(id);
             if(stock == null){
                 return NotFound();
             }
@@ -33,36 +33,25 @@ namespace api.Controllers{
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateStockRequestDto stockDto) {
             var stockModel = stockDto.toStockFromCreateDTO();
-            await _applicationDBContext.Stocks.AddAsync(stockModel);
-            await _applicationDBContext.SaveChangesAsync();
+            await _stockRepository.CreateAsync(stockModel);
             return CreatedAtAction(nameof(GetById), new {id = stockModel.Id}, stockModel.ToStockDto());
         }
         [HttpPut]
         [Route("{id}")]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateStockRequestDto updateDto ) {
-            var stockModel = await _applicationDBContext.Stocks.FirstOrDefaultAsync(func => func.Id == id);
+            var stockModel = await _stockRepository.UpdateAsync(id, updateDto);
             if(stockModel == null) {
                 return NotFound();
             }
-            stockModel.Symbol = updateDto.Symbol;
-            stockModel.CompanyName = updateDto.CompanyName;
-            stockModel.Purcase = updateDto.Purcase;
-            stockModel.LastDiv = updateDto.LastDiv;
-            stockModel.Industry = updateDto.Industry;
-            stockModel.MarketCap = updateDto.MarketCap;
-
-            await _applicationDBContext.SaveChangesAsync();
             return Ok(stockModel.ToStockDto());
         }
         [HttpDelete]
         [Route("{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id) {
-            var stockModel = await _applicationDBContext.Stocks.FirstOrDefaultAsync(func => func.Id == id);
+            var stockModel = await _stockRepository.DeleteAsync(id);
             if(stockModel == null) {
                 return NotFound();
             }
-            _applicationDBContext.Stocks.Remove(stockModel);
-            await _applicationDBContext.SaveChangesAsync();
             return NoContent();
         }
     }
