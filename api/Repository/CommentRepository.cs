@@ -10,6 +10,13 @@ namespace api.Repository {
         public CommentRepository (ApplicationDBContext applicationDBContext) {
             _applicationDBContext = applicationDBContext;
         }
+
+        public async Task<Comment> CreateAsync(Comment commentModel) {
+            await _applicationDBContext.Comments.AddAsync(commentModel);
+            await _applicationDBContext.SaveChangesAsync();
+            return commentModel;
+        }
+
         public async Task<List<Comment>> GetAllAsync() {
             return await _applicationDBContext.Comments.ToListAsync();
         }
