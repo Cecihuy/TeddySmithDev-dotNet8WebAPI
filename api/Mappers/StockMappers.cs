@@ -13,7 +13,8 @@ namespace api.Mappers {
                 Purcase = stockModel.Purcase,
                 LastDiv = stockModel.LastDiv,
                 Industry = stockModel.Industry,
-                MarketCap = stockModel.MarketCap
+                MarketCap = stockModel.MarketCap,
+                Comments = stockModel.Comments.Select(func => func.ToCommentDto()).ToList()
             };
         }
         public static Stock toStockFromCreateDTO(this CreateStockRequestDto createStockRequestDto) {

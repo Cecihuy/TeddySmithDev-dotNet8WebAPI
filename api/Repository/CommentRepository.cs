@@ -13,5 +13,9 @@ namespace api.Repository {
         public async Task<List<Comment>> GetAllAsync() {
             return await _applicationDBContext.Comments.ToListAsync();
         }
+        public Task<Comment?> GetByIdAsync(int id)
+        {
+            return null;
+        }
     }
 }
