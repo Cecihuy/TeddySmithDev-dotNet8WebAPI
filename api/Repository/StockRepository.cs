@@ -1,10 +1,12 @@
 using System;
 using api.Data;
 using api.Dtos.Stock;
+using api.Helpers;
 using api.Interfaces;
 using api.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace api.Repository {
     public class StockRepository : IStockRepository {
@@ -29,8 +31,15 @@ namespace api.Repository {
             return stockModel;
         }
 
-        public async Task<List<Stock>> GetAllAsync() {
-            return await _applicationDBContext.Stocks.Include(B => B.Comments).ToListAsync();
+        public async Task<List<Stock>> GetAllAsync(QueryObject queryObject) {
+            var stock = _applicationDBContext.Stocks.Include(B => B.Comments).AsQueryable();
+            if(!string.IsNullOrWhiteSpace(queryObject.CompanyName)) {
+                stock = stock.Where(B=> B.CompanyName.Contains(queryObject.CompanyName));
+            }
+            if(!string.IsNullOrWhiteSpace(queryObject.Symbol)) {
+                stock = stock.Where(B=> B.Symbol.Contains(queryObject.Symbol));
+            }
+            return await stock.ToListAsync();
         }
 
         public async Task<Stock?> GetByIdAsync(int id) {
